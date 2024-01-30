@@ -4,7 +4,6 @@ function getRandomHexColor() {
     .padStart(6, 0)}`;
 }
 
-let numberOfBoxes = 0;
 
 const boxes = document.querySelector('#boxes');
 boxes.style.display = 'flex';
@@ -23,6 +22,7 @@ const createBoxes = (amount) => {
 
   for (let i = 0; i < amount; i++) {
     const box = document.createElement('div');
+
     box.textContent = String(i + 1);
     box.style.height = boxHeight + 'px';
     box.style.width = boxWidth + 'px';
@@ -34,13 +34,21 @@ const createBoxes = (amount) => {
 
     boxHeight += 10;
     boxWidth += 10;
+
+  }
+  if (boxesCollection.length > 0) {
+    boxes.innerHTML = '';
+    boxHeight = 30;
+    boxWidth = 30;
   }
 
   boxes.append(...boxesCollection);
+
+
 };
 
 const handleAddBoxes = () => {
-  numberOfBoxes = Number(inputNumberOfBoxes.value);
+  const numberOfBoxes = Number(inputNumberOfBoxes.value);
 
   const maxNumberOfBoxes = inputNumberOfBoxes.getAttribute('max');
   const minNumberOfBoxes = inputNumberOfBoxes.getAttribute('min');
@@ -54,7 +62,9 @@ const handleAddBoxes = () => {
   }
 
   createBoxes(numberOfBoxes);
+
   inputNumberOfBoxes.value = '';
+
 };
 
 const handleRemoveBoxes = () => {
